@@ -66,19 +66,6 @@ public class Tower {
     	System.out.print("\n");
     }
 	
-	/* Java's equals() method returns true iff the two objects are the same objects
-	 *  this is a custom method to check if two towers are exactly the same. */
-	public static boolean towersEqual(Tower tower1, Tower tower2){
-		for(int i = 0; i < tower1.pegs.size(); i++){
-			//check if the disks on the pegs are the same.
-			for(int j = 0; j < tower1.pegs.get(i).size(); j++){
-				if(tower1.pegs.get(i).get(j) != tower2.pegs.get(i).get(j)){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 	
 //	@SuppressWarnings("serial")
 //	public static void main(String[] args){
