@@ -6,6 +6,12 @@ public class Astar{
 	public static List<TowerState> closed;
 	
 	public static void main(String[] args){
+
+//		Tower t1 = new Tower();
+//		Tower t2 = new Tower(t1);
+//		t2.pegs.remove(0);
+//		System.out.println(towersEqual(t1, t2));
+		
 		open = new ArrayList<TowerState>();
 		closed = new ArrayList<TowerState>();
 		
@@ -29,9 +35,13 @@ public class Astar{
 			
 			/* check if goal state */
 			if(open.get(0).h == 0){
-				System.out.println("Found Solution");
-				System.out.println("Path from goal to start:");
-				displayPath(open.get(0));
+				System.out.println("************************");
+				System.out.println("************************");
+				System.out.println("****Found Solution******");
+				System.out.println("************************");
+				System.out.println("************************");
+				//System.out.println("Path from goal to start:");
+				//displayPath(open.get(0));
 				return;
 			}
 			/* state info */
@@ -50,10 +60,6 @@ public class Astar{
 			open.remove(0);
 			closed.add(currentState);
 			System.out.println("Expanding state number: " + currentState.stateNum + "\n");
-			System.out.print("Current State Tower while loop");
-			currentState.tower.display();
-			System.out.print("Closed Queue Tower: while loop");
-			closed.get(0).tower.display();
 			System.out.println("");
 			genStates(currentState);
 		}
@@ -73,8 +79,6 @@ public class Astar{
 				
 				/* check for valid moves */
 				if(state.tower.pegs.get(j).size() == 0){
-					System.out.print("Closed Queue Tower:      if");
-					closed.get(0).tower.display();
 					/* create move */
 					Tower tower =  new Tower(state.tower);
 					int disk = tower.pegs.get(i).get(0);
@@ -98,18 +102,10 @@ public class Astar{
 					
 					else if(state.tower.pegs.get(i).get(0) < state.tower.pegs.get(j).get(0)){
 						/* create move */				
-						System.out.print("tower = \t  ");
-						state.tower.display(); 
-						
 						Tower tower =  new Tower(state.tower);
 						int disk = tower.pegs.get(i).get(0);
 						tower.pegs.get(i).remove(0);
 						tower.pegs.get(j).add(0, disk);
-						
-						System.out.print("tower = s.t\t"); 
-						tower.display();
-						System.out.print("Closed Queue Tower: else if");
-						closed.get(0).tower.display();
 						/* calculate using heuristic */
 						int g = state.g + disk;
 						int h = 6 - tower.getSumOfPeg(2);
@@ -137,21 +133,16 @@ public class Astar{
 		for(int i = 0; i < closed.size(); i++){
 			/* check if tower is in closed list */
 			if (towersEqual(tower, closed.get(i).tower)){
-				System.out.println("Tower was used in closed list");
-//				System.out.print("tower = \t   ");
-//				tower.display(); 
-//				System.out.print("closed.get(i).tower"); 
-//				closed.get(i).tower.display();
-//				System.out.println("");
 				return true;
 			}
 		}
 		for(int i = 0; i < open.size(); i++){	
 			/* check if tower is in open list */
-			if (towersEqual(tower, open.get(i).tower)){
-				System.out.println("Tower was used in open list");
-				return true;
-			}
+		
+				if (towersEqual(tower, open.get(i).tower)){
+					return true;
+				}
+			
 		}
 		/*if tower not found return false */
 		return false;
@@ -184,9 +175,14 @@ public class Astar{
 	/* Java's equals() method returns true iff the two objects are the same objects
 	 *  this is a custom method to check if two towers are exactly the same. */
 	public static boolean towersEqual(Tower tower1, Tower tower2){
+		
+		
 		for(int i = 0; i < tower1.pegs.size(); i++){
+			if(tower1.pegs.get(i).size() != tower2.pegs.get(i).size()){
+				return false;
+			}
 			//check if the disks on the pegs are the same.
-			for(int j = 0; j < tower2.pegs.get(i).size(); j++){
+			for(int j = 0; j < tower1.pegs.get(i).size(); j++){
 				if(tower1.pegs.get(i).get(j) != tower2.pegs.get(i).get(j)){
 					return false;
 				}

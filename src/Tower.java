@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
 
-public class Tower {
+public class Tower implements Cloneable {
 	public ArrayList<ArrayList<Integer>> pegs; //List array to represent the pegs
 	
 	/** Initialize the Start State Tower TOWER(PEG 1 (1, 2, 3), PEG 2 (null), PEG 3 (null) ); **/
 	public Tower(){
-		pegs = new ArrayList<ArrayList<Integer>>();
+		this.pegs = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> peg1 = new ArrayList<Integer>();
 		peg1.add(1);
 		peg1.add(2);
@@ -17,25 +17,25 @@ public class Tower {
         pegs.add(peg2);
         pegs.add(peg3);
 	};
+
+	/* Java uses references so we need to create a whole new *
+	 * object with the passed towers values                  */
 	
-//	public Tower(ArrayList<Integer> a, ArrayList<Integer> b,ArrayList<Integer> c){
-//		pegs = new ArrayList<ArrayList<Integer>>();
-//		pegs.add(a);
-//		pegs.add(b);
-//		pegs.add(c);
-//	}
-	/* Copy Constructor */
 	public Tower(Tower tower){
-		pegs = new ArrayList<ArrayList<Integer>>();
+		this.pegs = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> peg1 = new ArrayList<Integer>();
-		peg1 = tower.pegs.get(0);
 		ArrayList<Integer> peg2 = new ArrayList<Integer>();
-		peg2 = tower.pegs.get(1);
-		ArrayList<Integer> peg3 = new ArrayList<Integer>();
-		peg3 = tower.pegs.get(2);
-		pegs.add(peg1);
+        ArrayList<Integer> peg3 = new ArrayList<Integer>();
+        pegs.add(peg1);
         pegs.add(peg2);
         pegs.add(peg3);
+		for(int i = 0 ; i < tower.pegs.size(); i++){
+			if(tower.pegs.get(i).size() != 0){
+				for(int j = 0; j < tower.pegs.get(i).size(); j++){
+					this.pegs.get(i).add(tower.pegs.get(i).get(j)); 
+				}
+			}
+		}
 	}
 	
 	/* getDiskPeg returns the peg that the disk is currently on */
@@ -64,22 +64,4 @@ public class Tower {
     	}
     	System.out.print("\n");
     }
-	
-	
-//	@SuppressWarnings("serial")
-//	public static void main(String[] args){
-//		Tower t1 = new Tower();
-//		ArrayList<Integer> peg1 = new ArrayList<Integer>(){{add(2);
-//		add(3);
-//		}};
-//		ArrayList<Integer> peg2 = new ArrayList<Integer>(){{add(1);
-//		}};
-//		ArrayList<Integer> peg3 = new ArrayList<Integer>(){};
-//		Tower t2 = new Tower(peg1, peg2, peg3);
-//		
-//		System.out.print(towersEqual(t1, t2));
-//		
-//		t1.display();
-//		t2.display();
-//	}
 }

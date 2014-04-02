@@ -33,11 +33,12 @@ public class TowerState {
 				if(tower.pegs.get(j).size() > i)
 					System.out.print(" " + tower.pegs.get(j).get(tower.pegs.get(j).size() - i - 1) + " ");
 				else
-					System.out.print("\t");
+					System.out.print("   ");
 			}
-		    System.out.print("\n");
+		    System.out.println("");
 		}
 		System.out.println("---\t---\t---");
 		System.out.println(" A \t B \t C " + "\n");
+		System.out.println("");
 	}
 }
