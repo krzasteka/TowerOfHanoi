@@ -1,15 +1,15 @@
 
-public class State {
+public class TowerState {
 	public int stateNum,
                g,
                h,
                f;
-	public State pNode;     // parent node
+	public TowerState pNode;     // parent node
 	public Tower tower;     // tower coinciding with with current state 
 	public int[] config;    // current state configuration
 	static int lState = 1;  // # of the last state
 	
-	public State(int mDisk, int g, int h, Tower t, State state){
+	public TowerState(int mDisk, int g, int h, Tower t, TowerState state){
 		this.g = g;
 		this.h = h;
 		f = g + h;

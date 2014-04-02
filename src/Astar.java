@@ -2,19 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Astar{
-	public static List<State> open;   
-	public static List<State> closed;
+	public static List<TowerState> open;   
+	public static List<TowerState> closed;
 	
 	public static void main(String[] args){
-		open = new ArrayList<State>();
-		closed = new ArrayList<State>();
+		open = new ArrayList<TowerState>();
+		closed = new ArrayList<TowerState>();
 		
 		/* Starting State */
-		State initialState = new State(0, 0, 6, new Tower(), null);
+		TowerState initialState = new TowerState(0, 0, 6, new Tower(), null);
 		open.add(initialState);
 		System.out.println("Starting State:\n");
 		initialState.display();
 		while(true){
+			System.out.println("");
+			System.out.println("************************");
+			System.out.println("Beginning of WHILE loop!");
+			System.out.println("************************");
+			System.out.println("");
 			/* fail check */
 			if(open.size() == 0){
 				System.out.println("Size of open: " + open.size());
@@ -41,7 +46,7 @@ public class Astar{
 			System.out.println("");
 			
 			/* remove top node and add to closed list */
-			State currentState = open.get(0);
+			TowerState currentState = open.get(0);
 			open.remove(0);
 			closed.add(currentState);
 			System.out.println("Expanding state number: " + currentState.stateNum + "\n");
@@ -54,7 +59,7 @@ public class Astar{
 		}
 	}
 	/*State generator*/
-	static void genStates(State state){
+	static void genStates(TowerState state){
 		int numGenStates = 0; // keep track of how many states were generated for the currentState
 		
 		for(int i = 0; i < 3; i++){
@@ -81,7 +86,7 @@ public class Astar{
 					/* check if tower configuration was used */
 					if(!usedTower(tower)){
 						/* Generate new state */
-						State nState = new State(disk, g, h, tower, state);
+						TowerState nState = new TowerState(disk, g, h, tower, state);
 						int insert = getInsertPos(nState);
 						open.add(insert, nState);
 						numGenStates++;
@@ -111,7 +116,7 @@ public class Astar{
 						/* check if tower configuration was used */
 						if(!usedTower(tower)){							///NOT MAKING PAST ! usedTower!!!!!!!!!
 							/* Generate new state */
-							State nState = new State(disk, g, h, tower, state);
+							TowerState nState = new TowerState(disk, g, h, tower, state);
 							int insert = getInsertPos(nState);
 							open.add(insert, nState);
 							numGenStates++;
@@ -152,7 +157,7 @@ public class Astar{
 		return false;
 	}
 	
-	static int getInsertPos(State state){
+	static int getInsertPos(TowerState state){
 		/* check if open list is empty, if it is insert at [0] */
 		if(open.size() == 0){
 			return 0;
@@ -168,8 +173,8 @@ public class Astar{
 	}
 	
 	/*Display path for current state*/
-	static void displayPath(State state){
-		State currentState = state; //current state
+	static void displayPath(TowerState state){
+		TowerState currentState = state; //current state
 		while(currentState != null){
 			currentState.display();
 			currentState = currentState.pNode;
