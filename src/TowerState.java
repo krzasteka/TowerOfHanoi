@@ -26,10 +26,10 @@ public class TowerState {
 		System.out.println("State Number: " + stateNum);
 		System.out.println("f = " + f + " | " + "g = " + g + " | " + "h = " + h);
 		System.out.println("Current State: " + "{" + config[1] + "} {" + config[2] + "} {" + config[3] + "} {" + config[4] + "} {" + config[5] + "}");
-		
+		System.out.println("");
 		for(int i = 2; i >= 0; i--){
 			for(int j = 0; j < 3; j++){
-				System.out.println("\t");
+				System.out.print("\t");
 				if(tower.pegs.get(j).size() > i)
 					System.out.print(" " + tower.pegs.get(j).get(tower.pegs.get(j).size() - i - 1) + " ");
 				else
@@ -37,8 +37,7 @@ public class TowerState {
 			}
 		    System.out.println("");
 		}
-		System.out.println("---\t---\t---");
-		System.out.println(" A \t B \t C " + "\n");
-		System.out.println("");
+		System.out.println("\t---\t---\t---");
+		System.out.println("\t A \t B \t C " + "\n");
 	}
 }

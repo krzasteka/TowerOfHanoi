@@ -21,11 +21,7 @@ public class Astar{
 		System.out.println("Starting State:\n");
 		initialState.display();
 		while(true){
-			System.out.println("");
-			System.out.println("************************");
-			System.out.println("Beginning of WHILE loop!");
-			System.out.println("************************");
-			System.out.println("");
+
 			/* fail check */
 			if(open.size() == 0){
 				System.out.println("Size of open: " + open.size());
@@ -40,8 +36,8 @@ public class Astar{
 				System.out.println("****Found Solution******");
 				System.out.println("************************");
 				System.out.println("************************");
-				//System.out.println("Path from goal to start:");
-				//displayPath(open.get(0));
+				System.out.println("Path from goal to start:");
+				displayPath(open.get(0));
 				return;
 			}
 			/* state info */
